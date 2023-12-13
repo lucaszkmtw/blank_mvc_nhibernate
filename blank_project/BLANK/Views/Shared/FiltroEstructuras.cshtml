@@ -1,0 +1,17 @@
+﻿@model Seguridad.FiltroEstructuras
+
+@{
+    List<TGP.Seguridad.Common.Dto.EstructuraFuncionalDTO> dataOrg = Model.Estructuras;
+    var estructuras = dataOrg.Select(i => new SelectListItem
+    {
+        Value = i.Id.ToString(),
+        Text = HttpContext.Current.Server.HtmlDecode(CustomHelper.Truncate(i.DescripcionEstructura, 60).ToString()),
+        Selected = Model.EstructuraSelected != null && Model.EstructuraSelected.Id == i.Id
+    });
+}
+
+@Html.DropDownList("filterEstructuras", estructuras, new {@class = "selectize md-input label-fixed", id = "filterEstructuras" })
+
+
+@*<script>
+</script>*@

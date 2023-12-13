@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Error Inesperado";
+    Layout = "~/Views/Shared/_LayoutBootstrap.cshtml";
+}
+
+
+<div class="uk-grid uk-flex uk-flex-center">
+    <div class="uk-width-large-3-5 uk-width-medium-3-4">
+        <div class="md-card">
+            <div class="uk-flex uk-flex-center">
+                <div class="md-card-content">
+                    <div class="uk-width-1-1 uk-flex uk-flex-center">
+                        <img src="~/Content/img/error-inesperado.png" />
+                    </div>
+                    <div class="uk-width-1-1 uk-flex uk-flex-center">
+                        @*<img src="~/Content/img/error-sesion.png" />*@
+                        <span class="ops">OOPS!</span><br>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <span class="error">ERROR INESPERADO</span>
+                        </div>
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <span class="error">Ha ocurrido un error durante la ejecución del proceso.</span>
+                        </div>
+                    </div>
+                    <div class="uk-width-1-1 uk-margin-large-top">
+                        <div class="uk-flex uk-flex-center">
+                            <div>
+                                <a class="md-btn enviarformulario" id="btnEnviarError" onclick="enviarMailError()" style="margin-left:20px;">
+                                    ENVIAR FORMULARIO DE ERROR&nbsp;<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <p class="error">*Si el error persiste comunicarse via mail a depto-usuarios@tesoreria.gba.gov.ar o telefónicamente al 0221 4294400 Int 84633</p>
+
+                    </div>
+
+                    <div class="uk-width-1-1">
+                        @if (@ViewData["codigoError"] != null)
+                        {
+                            <div class="uk-accordion" data-uk-accordion="">
+
+                                <h3 class="uk-accordion-title md-bg-grey-50 md-color-red-900 uk-active">Mas información</h3>
+                                <div class="uk-accordion-content uk-active">
+                                    <div id="error-collapse">
+                                        <p style="line-height: 1.8;" class="text-justify  md-color-red-900">
+                                            Error al procesar la solicitud. Código de error: @ViewData["codigoError"].
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+@section scripts{
+    <script>
+
+    function enviarMailError() {
+        swal({
+            title: "¿Desea enviar el formulario de error?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Enviar",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (!isConfirm) return;
+            $.ajax({
+                url: '@Url.Action("EnviarEmail")',
+                type: "POST",
+                data: {
+                    programmerError: '@Html.Raw(Json.Encode(@ViewData["ProgramerErrorMessage"]))',
+                    controllerName: '@ViewData["controllerName"]',
+                    actionName: '@ViewData["actionName"]'
+                },
+                cache: false,
+                async: true,
+                success: function () {
+                    swal("Enviado", "El formulario de error se ha enviado correctamente", "success");
+                },
+            });
+        });
+    }
+
+    </script>
+
+}

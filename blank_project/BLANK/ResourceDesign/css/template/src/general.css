@@ -1,0 +1,178 @@
+﻿i.icon-red {
+    color: #e74c3c;
+}
+
+.input-no-padding {
+    padding: 0;
+}
+
+.font-bold{
+    font-weight: 600;
+}
+
+.bold-headers thead tr th {
+    color: #515151;
+    font-weight: 600;
+}
+.font-background-color-white {
+    background-color: white;
+}
+a.no-pointer {
+    pointer-events: none;
+}
+
+a.light-grey {
+    background-color: #dfe6e9;
+}
+
+a.grey {
+    background-color: #b2bec3
+}
+
+/*.md-btn-disabled {
+    background: #1976D282;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    min-height: 31px;
+    min-width: 70px;
+    padding: 2px 16px;
+    text-align: center;
+    text-shadow: none;
+    text-transform: uppercase;
+    transition: all 280ms ease;
+    color: white;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-appearance: none;
+    display: inline-block;
+    vertical-align: middle;
+    font: 500 14px / 31px "Roboto", sans-serif !important;
+}*/
+
+.md-btn-disabled {
+    background: #b2bec3 !important;
+    color: white;
+}
+
+    .md-btn-disabled:hover {
+        background: #b2bec3;
+        color: white;
+    }
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+     }
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #cecece;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: whitesmoke;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #7CB342;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 4px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*SCROLLING TEXT*/
+
+.textscroll {
+    height: 22px;
+    width:200px;
+    overflow: hidden;
+    position: relative;
+}
+
+    .textscroll div {
+        font-size: medium;
+        position: absolute;
+        margin: 0;
+        /* Starting position */
+        -moz-transform: translateX(100%);
+        -webkit-transform: translateX(200px);
+        transform: translateX(100%);
+        /* Apply animation to this element */
+        -moz-animation: textscroll 5s linear infinite;
+        -webkit-animation: textscroll 5s linear infinite;
+        animation: textscroll 5s linear infinite;        
+    }
+/* Move it (define the animation) */
+@-moz-keyframes textscroll {
+    0% {
+        -moz-transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%);
+    }
+}
+
+@-webkit-keyframes textscroll {
+    0% {
+        -webkit-transform: translateX(100%);
+    }
+
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+
+@keyframes textscroll {
+    0% {
+        -moz-transform: translateX(100%); /* Firefox bug fix */
+        -webkit-transform: translateX(100%); /* Firefox bug fix */
+        transform: translateX(100%);
+    }
+
+    100% {
+        -moz-transform: translateX(-100%); /* Firefox bug fix */
+        -webkit-transform: translateX(-100%); /* Firefox bug fix */
+        transform: translateX(-100%);
+    }
+}

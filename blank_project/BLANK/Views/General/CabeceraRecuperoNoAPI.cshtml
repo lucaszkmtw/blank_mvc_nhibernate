@@ -1,0 +1,136 @@
+﻿﻿<div class="md-card uk-margin-small-top uk-flex-center uk-margin-small-bottom" style="border-radius: 6px">
+    <div class="md-card-content">
+        <div class="uk-grid uk-flex uk-flex-space-between">
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold;">
+                    EXPEDIENTE
+                </div>
+                <div id="descripcionExpediente" class="uk-margin-small-bottom uk-grid-width-medium-1-7" style="font-size: medium; font-size: medium ">
+                    @if (ViewBag.recupero != null)
+                    {
+        <span>@ViewBag.recupero.Expediente.ExpedienteCompleto / R @ViewBag.recupero.IdentificacionRecupero</span> }
+                    else
+                    {
+        <span>-</span>}
+                </div>
+            </div>
+            <div class="uk-padding-small" id="ejemplo">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    ORIGEN
+                </div>
+                <div id="entidadOrigen" class="uk-grid-width-medium-1-7" style="font-size: medium; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px;" title="@ViewBag.recupero.Expediente.EntidadOrigen.RazonSocial">
+                    <div>
+                        @if (ViewBag.recupero != null)
+                        {
+            <span>@ViewBag.recupero.Expediente.EntidadOrigen.RazonSocial</span> }
+                        else
+                        {
+            <span id="entidadOrigenSpan">-</span>}
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    ACREEDOR
+                </div>
+                <div id="entidadAcreedor" style="font-size: medium; font-size: medium; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px;" class="uk-grid-width-medium-1-7" title="@ViewBag.recupero.Expediente.EntidadAcreedor.RazonSocial">
+                    <div>
+                        @if (ViewBag.recupero != null)
+                        {
+            <span>@ViewBag.recupero.Expediente.EntidadAcreedor.RazonSocial</span> }
+                        else
+                        {
+            <span id="entidadAcreedorSpan">-</span>}
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    TIPO DE CRÉDITO
+                </div>
+                <div id="tipoCredito" class="uk-grid-width-medium-1-7" style="font-size:medium">
+                    @if (ViewBag.recupero != null)
+                    {
+        <span>@ViewBag.recupero.Expediente.EntidadTipoCredito.TipoCredito.Desc</span> }
+                    else
+                    {
+        <span>-</span>}
+                </div>
+            </div>
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    INGRESO
+                </div>
+                <div id="fechaIngreso" class="uk-grid-width-medium-1-7" style="font-size:medium">
+                    @if (ViewBag.recupero != null)
+                    {
+        <span>@ViewBag.recupero.FechaIngreso.ToString("dd/MM/yyyy")</span> }
+                    else
+                    {
+        <span>-</span>}
+                </div>
+            </div>
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    PRESCRIPCIÓN
+                </div>
+                <div id="Prescripcion" class="uk-grid-width-medium-1-7 uk-flex-center" style="font-size:medium">
+                    @{ if (ViewBag.recupero != null)
+                                    {
+                                        if (ViewBag.recupero.FechaPrescripcion == null || ViewBag.recupero.FechaPrescripcion.Year != 1)
+                                        {
+                        @ViewBag.recupero.FechaPrescripcion.ToString("dd/MM/yyyy") }
+
+                                        else
+                                        {
+                        <div>-</div> }
+                                    }
+
+                                    else
+                                    {
+                        <span>-</span> } }
+                </div>
+            </div>
+
+            <div class="uk-padding-small">
+                <div class="uk-margin-small-bottom" style="font-weight: bold">
+                    MONTO ORIGINAL
+                </div>
+                <div id="montoRecupero" class="uk-grid-width-medium-1-7" style="font-size:medium">
+                    @if (ViewBag.recupero != null)
+                    {
+        <span>@ViewBag.recupero.Monto.ToString("C")</span> }
+
+                    else
+                    {
+        <span>-</span>}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Styles.Render("~/ResourceDesign/css/template/src/general.css")
+<script>var eo = document.getElementById("entidadOrigen");
+    var ea = document.getElementById("entidadAcreedor");
+
+    eo.addEventListener("mouseover", function () { textScrollTrue(this) }, false);
+    eo.addEventListener("mouseleave", function () { textScrollFalse(this) }, false);
+    ea.addEventListener("mouseover", function () { textScrollTrue(this) }, false);
+    ea.addEventListener("mouseleave", function () { textScrollFalse(this) }, false);
+    //ea.addEventListener("mouseover", textScroll, false);
+
+    function textScrollTrue(selector) {
+
+        let texto = selector.textContent;
+        if (texto.trim().length > 25) {
+            $('#' + selector.id).addClass('textscroll');
+        }
+    }
+
+    function textScrollFalse(selector) {
+        $('#' + selector.id).removeClass('textscroll');
+    }</script>
+

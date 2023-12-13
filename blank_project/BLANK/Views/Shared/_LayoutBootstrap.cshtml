@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>
+@using BLANK.SRSeguridad;
+@helper DisplayNode(System.Web.UI.WebControls.TreeNode nodoMenu)
+{
+    string[] split = nodoMenu.NavigateUrl.Split('/');
+
+    if (nodoMenu.ChildNodes.Count > 0)
+    {
+        @Html.Raw("<li class=" + "submenu_trigger" + ">");
+        if (split.Count() > 1) /*tiene un href*/
+        {
+            <a href="@Url.Action(split[2], split[1])">
+                @*<span class="menu_icon">
+                    <i class="material-icons">add</i>*@
+                @*@nodoMenu.ImageUrl*@
+                @*</span>*@
+                <span class="menu_title">@nodoMenu.Text</span>
+            </a>
+        }
+        else
+        {
+            <a href="#">
+                @*estos son los iconos particulares de sigaf*@
+                @if (nodoMenu.ImageUrl.Contains("icon-") || nodoMenu.ImageUrl.Contains("fa fa-"))
+                {
+                    <span class="menu_icon">
+                        <i class="@nodoMenu.ImageUrl"></i>
+                    </span>
+                    <span class="menu_title uk-text-top">@nodoMenu.Text</span>
+                }
+                else
+                {
+                    @*estos son los iconos de material icons*@
+                    <span class="menu_icon">
+                        <i class="material-icons">@nodoMenu.ImageUrl</i>
+                    </span>
+                    <span class="menu_title">@nodoMenu.Text</span>
+                }
+            </a>
+        }
+        @Html.Raw("<ul>");
+        foreach (System.Web.UI.WebControls.TreeNode child in nodoMenu.ChildNodes)
+        {
+            @DisplayNode(child);
+        }
+        @Html.Raw("</ul>");
+        @Html.Raw("</li>");
+    }
+    else
+    {
+        @Html.Raw("<li id='" + split[2] + "-" + split[1] + "'>");
+        if (split.Count() > 1)
+        {
+            <a href="@Url.Action(split[2], split[1])">
+                @if (nodoMenu.ImageUrl.Contains("icon-") || nodoMenu.ImageUrl.Contains("fa fa-"))
+                {
+                    <span class="menu_icon">
+                        <i class="@nodoMenu.ImageUrl"></i>
+                    </span>
+                    <span class="menu_title uk-text-top">@nodoMenu.Text</span>
+                }
+                else
+                {
+                    @*estos son los iconos de material icons*@
+                    <span class="menu_icon">
+                        <i class="material-icons">@nodoMenu.ImageUrl</i>
+                    </span>
+                    <span class="menu_title">@nodoMenu.Text</span>
+                }
+            </a>
+        }
+        else
+        {
+            <a href="#">
+                @*<span class="menu_icon">
+                        <i class="material-icons">@nodoMenu.ImageUrl</i>@
+                    </span>*@
+                <span class="menu_title">@nodoMenu.Text</span>
+            </a>
+        }
+        @Html.Raw("</li>");
+    }
+}
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Mimic Internet Explorer 11 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <meta name="description" content="Blank">
+    <meta name="author" content="Juan Cruz Sabatini">
+    @RenderSection("metaRefresh", required: false)
+
+    @*<link rel="shortcut icon" href="~/ResourceDesign/css/img/icoprov.ico" />*@
+    <title>@ViewBag.Title</title>
+
+    @*CSS*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/template/sigaf-font.css" rel="stylesheet" />
+    <link href="~/ResourceDesign/css/template/uikit.almost-flat.min.css" rel="stylesheet" type="text/css" />
+
+
+
+    @*<!-- altair admin -->*@
+    <link href="~/ResourceDesign/css/template/src/main.css" rel="stylesheet" type="text/css" />
+    <link href="~/ResourceDesign/css/template/BLANK.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/template/theme.css" rel="stylesheet" />
+
+    @*<link href="~/Content/icons/FontAwesome/less/fontawesome.min.css" rel="stylesheet" />*@
+    @*<!-- Own styles -->*@
+    <link href="~/ResourceDesign/css/template/manejo-errores.min.css?v=1.1" rel="stylesheet" />
+    <link href="~/ResourceDesign/css/template/plugins/sweetalert.css" rel="stylesheet" />
+
+    <script src="~/ResourceDesign/Scripts/template/common.min.js"></script>
+    <script src="~/ResourceDesign/Scripts/template/uikit_custom.min.js"></script>
+    <script src="~/ResourceDesign/Scripts/template/layoutScripts.js"></script>
+
+    @*ESTILOS DEL KENDO*@
+    <link href="~/ResourceDesign//css/template/plugins/kendo/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="~/ResourceDesign//css/template/plugins/kendo/kendo.material.min.css" rel="stylesheet" />
+    <script src="~/ResourceDesign/Scripts/kendo-datepicker/kendoui_custom.js"></script>
+    <script src="~/ResourceDesign/Scripts/kendo-datepicker/kendoui_custom.min.js"></script>
+
+    @RenderSection("styles", required: false)
+
+</head>
+<body class="app_theme sidebar_main_open sidebar_main_swipe">
+	<header id="header_main">
+		<nav class="uk-navbar">
+			<!-- TOP BAR -->
+			<div class="uk-container-center">
+				<a href="#" id="sidebar_main_toggle" class="sSwitch sSwitch_left">
+					<span class="sSwitchIcon"></span>
+				</a>
+                <a href="~/Home/Index" class="uk-navbar-brand uk-hidden-small" style="text-transform:none;" title="Ir a la home" data-uk-tooltip="{pos:'bottom'}">
+                    RECUPERO DE CREDITOS FISCALES | <STRONG> MINISTERIO DE HACIENDA Y FINANZAS</STRONG>
+                </a>
+
+				@if (Session["usuario"] != null)
+				{
+					<div class="uk-navbar-flip">
+						<ul class="uk-navbar-nav user_actions">
+
+
+							@if (Session["ambienteDB"] != null)
+							{
+								if (Session["ambienteDB"].ToString() != "PRODUC")
+								{
+									<li class="uk-hidden-small"><span class="ambiente-header">@Session["ambienteDB"]</span></li>@*Ambiente APP *@
+								}
+							}
+
+							<li>
+								<a href="#" id="full_screen_toggle" class="user_action_icon uk-visible-large" title="Ampliar Pantalla" data-uk-tooltip="{pos:'bottom'}">
+									<i class="material-icons md-24 md-light">fullscreen</i>
+								</a>
+							</li> @*Fullscreen*@
+							<li>
+								<a onclick="UIkit.modal('#divLoading').show();" href="@System.Configuration.ConfigurationManager.AppSettings["PortalURL"]Home/Index" class="user_action_icon" title="Aplicaciones" data-uk-tooltip="{pos:'bottom'}">
+									<i class="material-icons md-24 md-light">widgets</i>
+								</a>
+							</li>
+
+							<li data-uk-dropdown="{mode:'click',pos:'bottom-right'}" aria-haspopup="true" aria-expanded="false">
+								<a href="#" class="user_action_image" title="Configuracion" data-uk-tooltip="{pos:'bottom'}">
+									@if (Session["avatar"] != null)
+									{
+										var imgSrc = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String((Byte[])Session["avatar"]));
+										<img class="md-user-image" src='@imgSrc' title='@User.Identity.Name' style="">
+									}
+									else
+									{
+										<img class="md-user-image" src="~/Content/img/user.jpg" title='@User.Identity.Name' style="">
+									}
+									@*<span class="name">@User.Identity.Name</span>*@
+								</a>
+								<div class="uk-dropdown uk-dropdown-medium uk-dropdown-bottom" aria-hidden="true" tabindex="" style="min-width: 160px; top: 47px; left: 62px;">
+									<ul class="uk-nav js-uk-prevent">
+										<li>
+											<a href="@System.Configuration.ConfigurationManager.AppSettings["PortalURL"]Account/Perfil">
+												@*<i class="material-icons">account_circle</i>*@
+												Perfil
+											</a>
+										</li>
+										<li>
+											<a href="javascript:document.getElementById('logoutForm').submit()">
+												@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+												{
+													@Html.AntiForgeryToken()
+
+													@*<i class="fa fa-power-off"></i>*@
+													<span>Cerrar sesión</span>
+												}
+											</a>
+										</li>
+
+										<li>
+											<a href="@Url.Action("AcercaDe", "Account")">
+												@*<i class="fa fa-info-circle"></i>*@
+												Acerca de
+											</a>
+										</li>
+                                        <li>
+                                            <a href="~/Ayuda/Manual_de_usuario_RCF_v8.pdf" target="_blank">
+                                                @*<i class="fa fa-info-circle"></i>*@
+                                                Manuales
+                                            </a>
+                                        </li>
+									</ul>
+								</div>
+							</li> @*User dropdown*@
+						</ul>
+					</div> @*right functionality*@
+				}
+			</div>
+		</nav>
+	</header>
+
+    <aside id="sidebar_main">
+        @*<a id="change_sidebar" href="javascript:void(0)" class="md-fab sigaf_fab_sidebar uk-position-z-index uk-position-absolute md-fab-small waves-effect">
+            <i class="material-icons md-color-white">&#xE86F;</i>
+        </a>*@
+
+        <style>
+            .sidebar_main_header {
+                text-align: center;
+            }
+
+            hr {
+                position: relative;
+                top: -20px;
+                border: none;
+                height: 2px;
+               
+                margin-bottom: 0px;
+            }
+        </style>
+
+        <div class="sidebar_main_header">
+            <div class="sidebar_logo">
+                <div class="sSidebar_hide sidebar_logo_large">
+                    <img src="~/Content/img/recupero_logo_blanco.png" alt="logo eco" />
+                </div>
+            </div>
+        </div>
+
+        <hr size="10px" color="grey" allign="top"/>
+
+
+
+        <div class="menu_section">
+            @if (Session["usuario"] != null)
+            {
+                <ul>
+                    @*<li id="espacio">&nbsp;</li>*@
+                    @foreach (System.Web.UI.WebControls.TreeNode nodo in ((System.Web.UI.WebControls.TreeView)ECO.RCF.Controllers.AccountController.LoadTreeMenu((List<MenuWS>)Session["menues"])).Nodes)
+                    {
+                        @DisplayNode(nodo)
+                    }
+                </ul>
+            }
+        </div>
+    </aside>
+
+
+	<div id="page_content">
+		<div id="page_content_inner">
+			@RenderBody()
+		</div>
+	</div>
+
+    <footer id="footer" class="footer">
+        2023 © Todos los Derechos Reservados &nbsp;&nbsp;-&nbsp;&nbsp; MINISTERIO DE HACIENDA Y FINANZAS DE LA PROVINCIA DE BUENOS AIRES &nbsp;&nbsp;-&nbsp;&nbsp; Versión @System.Configuration.ConfigurationManager.AppSettings["version"]
+    </footer>
+	<!-- END FOOTER -->
+	<!--Modal loading-->
+	@Html.Partial("~/Views/Shared/Partials/LoadingModal.cshtml")
+	<!--END MODAL LOADING-->
+	<!-- Javascript -->
+
+	<script src="~/ResourceDesign/Scripts/template/altair_admin_common.js"></script>
+
+	<script src="~/ResourceDesign/Scripts/datatablesALTAIR/js/datatables.min.js"></script>
+	<script src="~/ResourceDesign/Scripts/datatablesALTAIR/js/dataTables.uikit.min.js"></script>
+	<script src="~/ResourceDesign/Scripts/datatablesALTAIR/js/plugins_datatables.min.js"></script>
+	<script src="~/ResourceDesign/Scripts/datatablesALTAIR/plugins/date-de.js"></script>
+	<script src="~/ResourceDesign/Scripts/datatablesALTAIR/plugins/numeric-comma.js"></script>
+
+	<script src="~/ResourceDesign/Scripts/sweetalert2.min.js"></script>
+
+	@*filter list*@
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filterlist.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-autocomplete.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-check.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-select.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-select-multiple.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-text-ajax.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-text-multiple.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-text.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-date.js"></script>
+	<script src="~/ResourceDesign/Scripts/FilterFramework/filters/filter-type-daterange.js"></script>
+
+	@RenderSection("scripts", required: false)
+
+	<script>
+        $(document).ajaxError(function () {
+            $(".log").text("Triggered ajaxError handler.");
+        });
+
+        // Manejo de errores global para las peticiones ajax
+        $(document).ajaxError(function (evt, xhr) {
+            try {
+                var json = $.parseJSON(xhr.responseText);
+
+                var mensajeError = json.errorMessage + "\n" + json.codigoError;
+
+                var tipo = (json.esErrorSesion) ? "warning" : "error";
+                swal({
+                    title: "Atención!",
+                    text: mensajeError,
+                    type: tipo
+                },
+
+                function () {
+                    if (json.esErrorSesion)
+                        window.location.href = "@System.Configuration.ConfigurationManager.AppSettings["LoginURL"]";
+                });
+
+            } catch (e) {
+                swal('Atención!', 'Ha ocurrido un error en la carga de la pantalla.', 'error');
+
+            }
+        });
+	</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3c1940af-200d-48f5-b528-63674e325d43" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://10.50.90.4/TGP.WSS/Seguridad.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Seguridad6.xsd" MetadataType="Schema" ID="10a10b7f-bf80-421f-9447-56002ef12c16" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd5" />
+    <MetadataFile FileName="Seguridad61.xsd" MetadataType="Schema" ID="e7451f91-d793-4274-aff6-7f5d90c7d09c" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd1" />
+    <MetadataFile FileName="Seguridad1.wsdl" MetadataType="Wsdl" ID="dcb966b7-3750-4405-8ff5-04fdc5449b38" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?wsdl" />
+    <MetadataFile FileName="Seguridad62.xsd" MetadataType="Schema" ID="9bb21ab3-b3fb-445e-9dda-9c90777ceaae" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd2" />
+    <MetadataFile FileName="Seguridad1.disco" MetadataType="Disco" ID="f9c75939-adc5-4dcd-9032-66ab3ff1b649" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?disco" />
+    <MetadataFile FileName="Seguridad63.xsd" MetadataType="Schema" ID="22a4ee15-d206-4aff-97f2-2b0436e69054" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd3" />
+    <MetadataFile FileName="Seguridad64.xsd" MetadataType="Schema" ID="f35db2bc-3e23-4812-a350-8d89c8a95c86" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd4" />
+    <MetadataFile FileName="Seguridad65.xsd" MetadataType="Schema" ID="d80d63e3-5b0a-445e-95dc-ccb492b54791" SourceId="1" SourceUrl="http://10.50.90.4/TGP.WSS/Seguridad.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
