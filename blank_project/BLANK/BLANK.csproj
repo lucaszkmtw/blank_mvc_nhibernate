@@ -128,7 +128,6 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-
     <Reference Include="MathNet.Numerics, Version=4.15.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.Signed.4.15.0\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
@@ -2743,15 +2742,12 @@
     <None Include="Web.DESA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="zConexiones\ConectionDB-TEST.config" />
     <None Include="Web.PRODUC.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.TEST.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="zConexiones\ConectionDB-DEMO.config" />
-    <Content Include="zConexiones\ConectionDB-PROD.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
